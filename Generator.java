@@ -13,7 +13,11 @@ public Generator (int p, int q){
 
 }
 
-public void generiereOeff() { //ermittelt e, d.h. Zufallszahl, die keinen gemeinsamen Teiler mit h hat
+/*aus der Aufgabenstellung geht nicht so richtig hervor, ob wir einfach die kleinste passende zahl
+oder irgendeine passende zahl ermitteln sollen. hab jetzt eine zufällige passende zahl genutzt,
+aber kann das auch noch ändern, weil die Zahlen teilweise ja sehr groß werden*/
+
+public void generiereOeff() { //ermittelt e, d.h. eine zahl, die keinen gemeinsamen Teiler mit h hat
 
   e = 1; //e auf 1 setzen
 
