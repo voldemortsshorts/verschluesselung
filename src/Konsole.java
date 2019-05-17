@@ -11,7 +11,7 @@ public class Konsole {
         printText("Welche Funktion soll ausgefuehrt werden?\n" +
                 "1) Die Schluesselpaargenerierung (KeyGenerator)\n" +
                 "2) Die Verschluesselungsfunktion (encrypt)\n" +
-                "3) Die Entschluesselungsfunktion (decrypt)\n");
+                "3) Die Entschluesselungsfunktion (decrypt)");
         int function = Konsole.getNumber(1, 3); // Wert von int function (1, 2 oder 3) legt fest, welche Funktion im naechsten Schritt ausgefuehrt wird
     }
 
@@ -36,7 +36,7 @@ public class Konsole {
 
 
     //
-    public static int getNumber() {
+    public static int getNumber() { // Falls kein min und max festgelegt wurden, wird in der Folge einfach jede Zahl akzeptiert
         return getNumber(0, 0, null, null);
     }
 
@@ -57,11 +57,11 @@ public class Konsole {
         while (!inputAccepted) { // Am Anfang auf jeden Fall erfuellt und danach solange, bis Eingabe korrekt war
             try {
                 nextInt = Integer.parseInt(intScanner.nextLine()); // Wandelt Eingabe aus einem String in einen Integer um
-                if (max == 0) { // Diese und naechste Zeile notwendig/nuetzlich?
+                if (max == 0) { // Falls kein min und max festgelegt wurden, wird einfach jede Zahl akzeptiert
                     inputAccepted = true;
                 } else {
                     if (nextInt < min || nextInt > max) { // Falls Eingabe nicht in Intervall [min-max] liegt
-                        if (outOfRangeError != null && !outOfRangeError.isEmpty()) { //
+                        if (outOfRangeError != null && !outOfRangeError.isEmpty()) { // Fall ueberfluessig?
                             printFormatText(outOfRangeError, min, max);
                         } else {
                             printFormatText("Die Eingegebene Zahl muss groesser als %d und kleiner als %d sein.", min, max);
@@ -70,8 +70,8 @@ public class Konsole {
                         inputAccepted = true;
                     }
                 }
-            } catch (NumberFormatException noNumberException) {
-                if (noNumberError != null && !noNumberError.isEmpty()) {
+            } catch (NumberFormatException noNumberException) { // Faengt alls ab, was keine Zahl ist
+                if (noNumberError != null && !noNumberError.isEmpty()) { // Fall ueberfluessig?
                     printText(noNumberError);
                 } else {
                     printText("Die Eingabe muss ein Integer sein.");
