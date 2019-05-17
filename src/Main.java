@@ -6,12 +6,6 @@ public class Main {
         konsole.inputSelection();
 
 
-        /*
-        Generator gen = new Generator(11, 17); //Beispieleingabe
-        gen.start();
-         */
-
-
     }
 
 }

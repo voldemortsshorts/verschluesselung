@@ -2,8 +2,8 @@ import java.util.Scanner;
 
 public class Konsole {
 
-    public Konsole() {
-    } // Leerer Konstruktor, hat keine Variablen, nur Methoden
+    public Konsole() { // Leerer Konstruktor, hat keine Variablen, nur Methoden
+    }
 
     // Allererste Nutzerabfrage: Welche Funktion soll ausgefuehrt werden?
     public static void inputSelection() {
@@ -13,6 +13,12 @@ public class Konsole {
                 "2) Die Verschluesselungsfunktion (encrypt)\n" +
                 "3) Die Entschluesselungsfunktion (decrypt)");
         int function = Konsole.getNumber(1, 3); // Wert von int function (1, 2 oder 3) legt fest, welche Funktion im naechsten Schritt ausgefuehrt wird
+
+        switch (function) {
+            case 1: startKeyGen(); break;
+            // case 2:
+            // case 3:
+        }
     }
 
 
@@ -64,7 +70,7 @@ public class Konsole {
                         if (outOfRangeError != null && !outOfRangeError.isEmpty()) { // Fall ueberfluessig?
                             printFormatText(outOfRangeError, min, max);
                         } else {
-                            printFormatText("Die Eingegebene Zahl muss groesser als %d und kleiner als %d sein.", min, max);
+                            printFormatText("Fehler :Die Eingegebene Zahl muss groesser als %d und kleiner als %d sein.", min, max);
                         }
                     } else {
                         inputAccepted = true;
@@ -74,68 +80,55 @@ public class Konsole {
                 if (noNumberError != null && !noNumberError.isEmpty()) { // Fall ueberfluessig?
                     printText(noNumberError);
                 } else {
-                    printText("Die Eingabe muss ein Integer sein.");
+                    printText("Fehler: Die Eingabe muss ein Integer sein.");
                 }
             }
         }
         return nextInt;
     }
-}
 
 
+    public static void startKeyGen() {
 
-/*
-        public static long getNumber(long min, long max) {
-            return getNumber(min, max, null, null);
+        Konsole.printText("Schluesselpaargenerierung gestartet");
+        Konsole.printText("Bitte geben Sie die erste Primzahl p ein:");
+        int p = Konsole.getNumber();
+        while (!isPrime(p)) {
+            Konsole.printText("Fehler: Die eingegebene Zahl muss eine Primzahl sein.");
+            p = Konsole.getNumber();
+        }
+        Konsole.printText("Bitte geben Sie die zweite Primzahl q ein:");
+        int q = Konsole.getNumber();
+        while (!isPrime(q)) {
+            Konsole.printText("Fehler: Die eingegebene Zahl muss eine Primzahl sein.");
+            q = Konsole.getNumber();
         }
 
-        public static long getNumber ( long min, long max, String noNumberError, String outOfRangeError){
-
-            Scanner intScanner = new Scanner(System.in);
-            boolean inputAccepted = false;
-            long nextLong = 0;
-            while (!inputAccepted)
-                try {
-                    nextLong = Long.parseLong(intScanner.nextLine());
-                    if (max == 0) {
-                        inputAccepted = true;
-                    } else {
-                        if (nextLong < min || nextLong > max) {
-                            if (outOfRangeError != null && !outOfRangeError.isEmpty()) {
-                                sendFormatText(outOfRangeError, min, max);
-                            } else {
-                                sendFormatText("Fehler! Die Zahl muss groesser als %d und kleiner als %d. sein.", min, max);
-                            }
-                        } else {
-                            inputAccepted = true;
-                        }
-                    }
-                } catch (NumberFormatException noNumberException) {
-                    if (noNumberError != null && !noNumberError.isEmpty()) {
-                        printText(noNumberError);
-                    } else {
-                        printText("Input has to be an integer number.");
-                    }
-                }
-            return nextLong;
-        }
+        Generator gen = new Generator(p, q);
+        // gen.startKeyPairGen(); Jetzt direkt in den Konstruktor gepackt
     }
 
 
-
-        public static void sendChar(char character) {
-
-            System.out.print(character);
+    public static boolean isPrime(int num) {
+        if (num <= 1) {
+            return true;
         }
-
-        public static void sendFormatText(String text, Object... args) {
-
-            System.out.printf(text+"\n", args);
+        if (num == 2) {
+            return true;
         }
+        if (num % 2 == 0) {
+            return false;
+        }
+        for (int i = 3; i * i <= num; i += 2) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 
- */
 
+    public void encrypt () {
 
-
-
-
+    }
+}
