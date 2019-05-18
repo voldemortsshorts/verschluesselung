@@ -62,10 +62,10 @@ public class Cryptor {
             while( (line = br.readLine()) !=null )
             {
                 // Int viel zu klein fuer exponentielle Berechnungen. Evtl. auch encrypt() anpassen
-                BigInteger basisK = new BigInteger(line);
+                BigInteger basisV = new BigInteger(line);
                 BigInteger expoD = BigInteger.valueOf(privateKey.getD());
                 BigInteger modG = BigInteger.valueOf(privateKey.getG());
-                BigInteger resultBIG = basisK.modPow(expoD, modG);
+                BigInteger resultBIG = basisV.modPow(expoD, modG);
 
                 int result = resultBIG.intValue();
 
