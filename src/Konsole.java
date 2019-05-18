@@ -149,11 +149,8 @@ public class Konsole {
         if (num % 2 == 0) {
             return false;
         }
-<<<<<<< HEAD
-        for (int i = 3; i <= num/2; i += 2) {
-=======
+
         for (int i = 3; i <= (num/2); i += 2) {
->>>>>>> 83d467c7d5d0f1246d83c06f2cbfea55a3788ef0
             if (num % i == 0) {
                 return false;
             }
