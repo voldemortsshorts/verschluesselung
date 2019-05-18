@@ -5,7 +5,6 @@ public class Main {
         Konsole konsole = new Konsole();
         konsole.inputSelection();
 
-
     }
 
 }

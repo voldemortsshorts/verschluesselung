@@ -7,20 +7,20 @@ public class Cryptor {
 
     public static void encrypt (String filePath, PublicKey publicKey, boolean toNewFile) {
         try {
-            File sourceFile = new File(filePath);
-            File targetFile = new File("encryptedFile.txt");
+            File sourceFile = new File(filePath); // Zu verschluesselnde Datei wird festgelegt
+            File targetFile = new File("encryptedFile.txt"); // Zieldatei: Dateiname wird vorbereitet
             try {
-                targetFile.createNewFile();
+                targetFile.createNewFile(); // Zieldatei wird angelegt
             } catch (IOException e) {
                 Konsole.printText("Fehler: Datei fuer verschluesselten Text konnte nicht erstellt werden.");
             }
-            FileInputStream fis = new FileInputStream(sourceFile); // Eingegebener Dateipfad der zu verschluesselnden Datei wird hinterlegt
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
+            FileInputStream fis = new FileInputStream(sourceFile); // InputStream:Eingegebener Dateipfad der zu verschluesselnden Datei wird hinterlegt
+            InputStreamReader isr = new InputStreamReader(fis); // Reader wird auf InputStream gesetzt
+            BufferedReader br = new BufferedReader(isr); // BufferReader verarbeitet Reader
             FileWriter fw = new FileWriter(targetFile); // Zieldatei wird hinterlegt
             BufferedWriter bw = new BufferedWriter(fw); // Writer wird vorbereitet
             int value = 0;
-            while ( (value = br.read()) != -1) { // Geht BufferedReader durch; -1 waere Fehlermeldung
+            while ( (value = br.read()) != -1) { // Geht BufferedReader durch; -1 bedeutet, dass keine Zeichen mehr zu lesen sind
                 char c = (char)value; // Wieder rausnehmen, nur Kontrolle
                 System.out.println(c); // Wieder rausnehmen, nur Kontrolle
                 int basisK = value;
@@ -61,7 +61,7 @@ public class Cryptor {
             String line = "";
             while( (line = br.readLine()) !=null )
             {
-
+                // Int viel zu klein fuer exponentielle Berechnungen. Evtl. auch encrypt() anpassen
                 BigInteger basisK = new BigInteger(line);
                 BigInteger expoD = BigInteger.valueOf(privateKey.getD());
                 BigInteger modG = BigInteger.valueOf(privateKey.getG());

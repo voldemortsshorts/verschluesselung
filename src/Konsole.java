@@ -2,10 +2,12 @@ import java.io.File;
 import java.sql.SQLOutput;
 import java.util.Scanner;
 
+
 public class Konsole {
 
     public Konsole() { // Leerer Konstruktor, hat keine Variablen, nur Methoden
     }
+
 
     // Allererste Nutzerabfrage: Welche Funktion soll ausgefuehrt werden?
     public static void inputSelection() {
@@ -30,15 +32,18 @@ public class Konsole {
     }
 
 
-    // Printet variable Anahl von Eingabeobjekten
+    // Printet variable Anahl von Eingabeobjekten in der Konsole
     public static void printFormatText(String text, Object... args) {
         System.out.printf(text + "\n", args);
     }
 
 
+    // Printet chars in der Konsole
     public static void printChar(char charecter) {
         System.out.println(charecter);
     }
+
+
 
     // Scannt naechste Textzeile in der Konsole
     public static String getText() {
@@ -47,19 +52,23 @@ public class Konsole {
     }
 
 
-    //
+
+    /* getNumber-Funktion: Scannt eine Nutzereingabe in der Konsole.
+    Diese kann entweder in eine bestimmten, vorher festgelegten Intervall liegenm,
+    oder es kann eine beliebige Zahl gewaehlt werden, wenn kein Intervall ausgewaehlt wurde
+     */
     public static int getNumber() { // Falls kein min und max festgelegt wurden, wird in der Folge einfach jede Zahl akzeptiert
         return getNumber(0, 0, null, null);
     }
 
 
-    //
+    // Vorbereitung fuer Aufruf mit Intervall von [min-max]
     public static int getNumber(int min, int max) {
         return getNumber(min, max, null, null);
     }
 
 
-    //
+    // Aufruf mit Intervall von [min-max]
     public static int getNumber(int min, int max, String noNumberError, String outOfRangeError) {
 
         Scanner intScanner = new Scanner(System.in); // Stellt Int-Scanner bereit
@@ -73,7 +82,7 @@ public class Konsole {
                     inputAccepted = true;
                 } else {
                     if (nextInt < min || nextInt > max) { // Falls Eingabe nicht in Intervall [min-max] liegt
-                        if (outOfRangeError != null && !outOfRangeError.isEmpty()) { // Fall ueberfluessig?
+                        if (outOfRangeError != null && !outOfRangeError.isEmpty()) {
                             printFormatText(outOfRangeError, min, max);
                         } else {
                             printFormatText("Fehler :Die Eingegebene Zahl muss groesser als %d und kleiner als %d sein.", min, max);
@@ -83,7 +92,7 @@ public class Konsole {
                     }
                 }
             } catch (NumberFormatException noNumberException) { // Faengt alls ab, was keine Zahl ist
-                if (noNumberError != null && !noNumberError.isEmpty()) { // Fall ueberfluessig?
+                if (noNumberError != null && !noNumberError.isEmpty()) {
                     printText(noNumberError);
                 } else {
                     printText("Fehler: Die Eingabe muss ein Integer sein.");
