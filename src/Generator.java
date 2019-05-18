@@ -9,7 +9,9 @@ public class Generator {
 
     public Generator(int p, int q) {
         g = p * q;
-        h = (p - 1) * (q - 1);
+        h = (p - 1) * (q - 1); // h = phi
+
+        startKeyPairGen();
 
     }
 
@@ -25,7 +27,7 @@ aber kann das auch noch ändern, weil die Zahlen teilweise ja sehr groß werden*
             int zufall = (int) (Math.random() * 10) + 1; //Zufallszahl zwischen 1 und 10 erstellen
             boolean teiltBeide = false;
             int i = 2;
-            while (!teiltBeide && i <= zufall) { //beginnend bei 2, alle potentiellen Teiler testen
+            while (!teiltBeide && i <= zufall) { //beginnend bei 2, alle potentiellen Teiler testen  // es gibt auch direkt gcd()
                 if (h % i == 0 && zufall % i == 0) {
                     teiltBeide = true; /*sobald ein gemeinsamer Teiler gefunden ist, hört innere Schleife auf, e bleibt dann 1
         und eine neue Zufallszahl wird generiert*/
@@ -43,7 +45,7 @@ aber kann das auch noch ändern, weil die Zahlen teilweise ja sehr groß werden*
 
         pubKey = new PublicKey(e, g);
 
-        System.out.println(e + "," + g); //zur Überprüfung
+        System.out.println("Oeffentlicher Schluessel wurde erstellt. {e: " + e + ", g: " + g+ "}"); //zur Überprüfung
 
     }
 
@@ -52,7 +54,7 @@ aber kann das auch noch ändern, weil die Zahlen teilweise ja sehr groß werden*
 
         d = 1; //d auf 1 setzen
         while (d == 1) {
-            int zufall = (int) (Math.random() * 1000) + 1; //ermittle Zufallszahl zwischen 1 und 1000
+            int zufall = (int) (Math.random() * 40000000) + 1; //ermittle Zufallszahl zwischen 1 und 1000
             int rest = zufall * e % h;
     /*wenn h Zufallszahl*e mit Rest 1 teilt, wird Zufallszahl d zugewiesen,
     ansonsten bleibt d = 1 und neue Zufallszahl wird generiert:*/
@@ -63,12 +65,12 @@ aber kann das auch noch ändern, weil die Zahlen teilweise ja sehr groß werden*
         }
         privKey = new PrivateKey(d, g);
 
-        System.out.println(d + "," + g); //zur Überprüfung
+        System.out.println("Privater Schluessel wurde erstellt. {d: " + d + ", g: " + g + "}"); //zur Überprüfung
     }
 
-    public void start() {
-        this.generiereOeff();
-        this.generierePriv();
+    public void startKeyPairGen() {
+        generiereOeff();
+        generierePriv();
     }
 
 

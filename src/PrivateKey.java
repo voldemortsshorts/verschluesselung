@@ -8,5 +8,12 @@ public class PrivateKey {
         this.g = g;
     }
 
+    public int getD() {
+        return d;
+    }
+
+    public int getG() {
+        return g;
+    }
 
 }
