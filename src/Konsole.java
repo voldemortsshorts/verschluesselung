@@ -1,3 +1,5 @@
+import java.io.File;
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Konsole {
@@ -16,8 +18,8 @@ public class Konsole {
 
         switch (function) {
             case 1: startKeyGen(); break;
-            // case 2:
-            // case 3:
+            case 2: startEncrypt(); break;
+            case 3: startDecrypt(); break;
         }
     }
 
@@ -34,8 +36,12 @@ public class Konsole {
     }
 
 
+    public static void printChar(char charecter) {
+        System.out.println(charecter);
+    }
+
     // Scannt naechste Textzeile in der Konsole
-    public static String scanText() {
+    public static String getText() {
         Scanner textScanner = new Scanner(System.in);
         return textScanner.nextLine();
     }
@@ -87,6 +93,20 @@ public class Konsole {
         return nextInt;
     }
 
+    public static String getFilePath() {
+        return getFilePath("Fehler: Der eingegebene Pfad ist ungueltig.");
+    }
+
+
+    public static String getFilePath (String noPathError) {
+        String filePath = getText();
+        while (!new File(filePath).isFile()) {
+            Konsole.printText(noPathError);
+            filePath = Konsole.getText();
+        }
+        return filePath;
+    }
+
 
     public static void startKeyGen() {
 
@@ -128,7 +148,60 @@ public class Konsole {
     }
 
 
-    public void encrypt () {
+    public static void startEncrypt () {
+        Konsole.printText("Verschluesselungsprozess gestartet");
+        Konsole.printText("Bitte geben Sie den Dateipfad zu der Datei ein, die Sie verschluesseln moechten:");
 
+        String filePath = Konsole.getFilePath();
+
+        Konsole.printText("Wie soll der verschluesselte Text bereitgestellt werden?\n" +
+                "1) In einer neuen Datei\n" + // diese wird im Ordner, in dem das Programm laeuft, erzeugt
+                "2) In der Konsole");
+
+        int dataOutputSel = Konsole.getNumber(1, 2);
+        boolean toNewFile = false;
+        if (dataOutputSel == 1) {
+            toNewFile = true;
+        }
+
+        Konsole.printText("Geben Sie jetzt bitte die Werte Ihres Oeffentlichen Schluessels ein.\n" +
+                "e: ");
+        int e = Konsole.getNumber();
+
+        Konsole.printText("g: ");
+        int g = Konsole.getNumber();
+
+        PublicKey publicKey = new PublicKey(e, g);
+
+        Cryptor.encrypt(filePath, publicKey, toNewFile);
+    }
+
+
+    public static void startDecrypt () {
+        Konsole.printText("Entschluesselungsprozess gestartet");
+        Konsole.printText("Bitte geben Sie den Dateipfad zu der Datei ein, die Sie entschluesseln moechten:");
+
+        String filePath = Konsole.getFilePath();
+
+        Konsole.printText("Wie soll der entschluesselte Text bereitgestellt werden?\n" +
+                "1) In einer neuen Datei\n" + // diese wird im Ordner, in dem das Programm laeuft, erzeugt
+                "2) In der Konsole");
+
+        int dataOutputSel = Konsole.getNumber(1, 2);
+        boolean toNewFile = false;
+        if (dataOutputSel == 1) {
+            toNewFile = true;
+        }
+
+        Konsole.printText("Geben Sie jetzt bitte die Werte Ihres Oeffentlichen Schluessels ein.\n" +
+                "d: ");
+        int d = Konsole.getNumber();
+
+        Konsole.printText("g: ");
+        int g = Konsole.getNumber();
+
+        PrivateKey privateKey= new PrivateKey(d, g);
+
+        Cryptor.decrypt(filePath, privateKey, toNewFile);
     }
 }

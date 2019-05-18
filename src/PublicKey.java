@@ -8,5 +8,13 @@ public class PublicKey {
         this.g = g;
     }
 
+    public int getE() {
+        return e;
+    }
+
+    public int getG() {
+        return g;
+    }
+
 
 }
