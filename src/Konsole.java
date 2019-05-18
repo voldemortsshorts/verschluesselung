@@ -85,7 +85,8 @@ public class Konsole {
                         if (outOfRangeError != null && !outOfRangeError.isEmpty()) {
                             printFormatText(outOfRangeError, min, max);
                         } else {
-                            printFormatText("Fehler :Die Eingegebene Zahl muss groesser als %d und kleiner als %d sein.", min, max);
+                            printFormatText("Fehler: Die eingegebene Zahl muss groesser als %d und kleiner als %d " +
+                                    "sein.", min, max);
                         }
                     } else {
                         inputAccepted = true;
@@ -120,17 +121,17 @@ public class Konsole {
     public static void startKeyGen() {
 
         Konsole.printText("Schluesselpaargenerierung gestartet");
-        Konsole.printText("Bitte geben Sie die erste Primzahl p ein:");
+        Konsole.printText("Bitte geben Sie die erste Primzahl p ein [2–1000]:");
         int p = Konsole.getNumber();
         while (!isPrime(p)) {
             Konsole.printText("Fehler: Die eingegebene Zahl muss eine Primzahl sein.");
-            p = Konsole.getNumber();
+            p = Konsole.getNumber(2, 1000);
         }
-        Konsole.printText("Bitte geben Sie die zweite Primzahl q ein:");
+        Konsole.printText("Bitte geben Sie die zweite Primzahl q ein [2–1000]:");
         int q = Konsole.getNumber();
         while (!isPrime(q)) {
             Konsole.printText("Fehler: Die eingegebene Zahl muss eine Primzahl sein.");
-            q = Konsole.getNumber();
+            q = Konsole.getNumber(2, 1000);
         }
 
         Generator gen = new Generator(p, q);

@@ -45,7 +45,7 @@ aber kann das auch noch ändern, weil die Zahlen teilweise ja sehr groß werden*
 
         pubKey = new PublicKey(e, g);
 
-        System.out.println("Oeffentlicher Schluessel wurde erstellt. e: {" + e + ", g: " + g+ "}"); //zur Überprüfung
+        System.out.println("Oeffentlicher Schluessel wurde erstellt. {e: " + e + ", g: " + g+ "}"); //zur Überprüfung
 
     }
 
@@ -54,7 +54,7 @@ aber kann das auch noch ändern, weil die Zahlen teilweise ja sehr groß werden*
 
         d = 1; //d auf 1 setzen
         while (d == 1) {
-            int zufall = (int) (Math.random() * 1000) + 1; //ermittle Zufallszahl zwischen 1 und 1000
+            int zufall = (int) (Math.random() * 40000000) + 1; //ermittle Zufallszahl zwischen 1 und 1000
             int rest = zufall * e % h;
     /*wenn h Zufallszahl*e mit Rest 1 teilt, wird Zufallszahl d zugewiesen,
     ansonsten bleibt d = 1 und neue Zufallszahl wird generiert:*/
