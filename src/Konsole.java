@@ -140,7 +140,7 @@ public class Konsole {
 
     public static boolean isPrime(int num) {
         if (num <= 1) {
-            return true;
+            return false;
         }
         if (num == 2) {
             return true;
@@ -148,7 +148,7 @@ public class Konsole {
         if (num % 2 == 0) {
             return false;
         }
-        for (int i = 3; i * i <= num; i += 2) {
+        for (int i = 3; i <= (num/2); i += 2) {
             if (num % i == 0) {
                 return false;
             }
@@ -202,7 +202,7 @@ public class Konsole {
             toNewFile = true;
         }
 
-        Konsole.printText("Geben Sie jetzt bitte die Werte Ihres Oeffentlichen Schluessels ein.\n" +
+        Konsole.printText("Geben Sie jetzt bitte die Werte Ihres Privaten Schluessels ein.\n" +
                 "d: ");
         int d = Konsole.getNumber();
 
