@@ -3,7 +3,15 @@ import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import java.io.*;
 import java.math.BigInteger;
 
+/**
+ * Klasse mit statischen Methoden zur Ver- und Entschluesselung von Texten.
+ */
+
 public class Cryptor {
+
+  /**
+   * Methode zur Verschluesselung eines Textes aus Datei
+   */
 
     public static void encrypt (String filePath, PublicKey publicKey, boolean toNewFile) {
         try {
@@ -43,6 +51,9 @@ public class Cryptor {
         }
     }
 
+    /**
+     * Methode zur Entschluesselung eines Textes aus Datei
+     */
 
     public static void decrypt(String filePath, PrivateKey privateKey, boolean toNewFile) {
         try {

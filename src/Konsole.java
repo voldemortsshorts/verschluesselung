@@ -2,14 +2,21 @@ import java.io.File;
 import java.sql.SQLOutput;
 import java.util.Scanner;
 
+/**
+ * Klasse, die Nutzereingaben verarbeitet und gewuenschtes Modul aufruft.
+ */
 
 public class Konsole {
 
-    public Konsole() { // Leerer Konstruktor, hat keine Variablen, nur Methoden
+    public Konsole() {
     }
 
 
-    // Allererste Nutzerabfrage: Welche Funktion soll ausgefuehrt werden?
+
+
+    /**
+     * Initiale Nutzerabfrage. Fordert zur Auswahl eines der drei Module auf.
+     */
     public static void inputSelection() {
 
         printText("Welche Funktion soll ausgefuehrt werden?\n" +
@@ -25,27 +32,36 @@ public class Konsole {
         }
     }
 
+    /**
+     * Gibt uebergebenen String in der Konsole aus.
+     */
 
-    // Printet uebergebenen String in der Konsole
     public static void printText(String text) {
         System.out.println(text);
     }
 
+    /**
+     * Gibt variable Anahl von Eingabeobjekten in der Konsole aus.
+     */
 
-    // Printet variable Anahl von Eingabeobjekten in der Konsole
+
     public static void printFormatText(String text, Object... args) {
         System.out.printf(text + "\n", args);
     }
 
 
-    // Printet chars in der Konsole
+    /**
+     * Gibt chars in der Konsole aus.
+     */
     public static void printChar(char charecter) {
         System.out.println(charecter);
     }
 
 
 
-    // Scannt naechste Textzeile in der Konsole
+    /**
+     * Scannt nächste Textzeile in der Konsole.
+     */
     public static String getText() {
         Scanner textScanner = new Scanner(System.in);
         return textScanner.nextLine();
@@ -54,21 +70,34 @@ public class Konsole {
 
 
     /* getNumber-Funktion: Scannt eine Nutzereingabe in der Konsole.
-    Diese kann entweder in eine bestimmten, vorher festgelegten Intervall liegenm,
+    Diese kann entweder in eine bestimmten, vorher festgelegten Intervall liegen,
     oder es kann eine beliebige Zahl gewaehlt werden, wenn kein Intervall ausgewaehlt wurde
      */
+
+     /**
+      * getNumber-Funktion: überladene Funktion, die Nutzereingabe scannt und wahlweise darauf prüft, ob die eingelesene Zahl
+      * im gewuenschten Intervall liegt
+      */
+
+      /**
+       * Aufruf ohne Intervall
+       */
     public static int getNumber() { // Falls kein min und max festgelegt wurden, wird in der Folge einfach jede Zahl akzeptiert
         return getNumber(0, 0, null, null);
     }
 
+    /**
+     * Aufruf mit Intervall [min-max]
+     */
 
-    // Vorbereitung fuer Aufruf mit Intervall von [min-max]
     public static int getNumber(int min, int max) {
         return getNumber(min, max, null, null);
     }
 
 
-    // Aufruf mit Intervall von [min-max]
+    /**
+     * wird in jedem Falle rekursiv aufgerufen und prueft eingelesenen Inhalt darauf, ob er Integer ist und evtl. ob Integer im gewuenschten Bereich liegt.
+     */
     public static int getNumber(int min, int max, String noNumberError, String outOfRangeError) {
 
         Scanner intScanner = new Scanner(System.in); // Stellt Int-Scanner bereit
@@ -117,6 +146,10 @@ public class Konsole {
         return filePath;
     }
 
+    /**
+     * Modul 1: Erstellt Schluesselpaar, indem es eingegebene Zahlen darauf prüft, ob sie Primzahlen sind und im vorgegebenen Intervall liegen,
+     * und schließlich ein neues Generator-Objekt erstelt.
+     */
 
     public static void startKeyGen() {
 
@@ -138,7 +171,9 @@ public class Konsole {
         // gen.startKeyPairGen(); Jetzt direkt in den Konstruktor gepackt
     }
 
-
+    /**
+     * Testet Zahlen darauf, ob sie Primzahlen sind.
+     */
     public static boolean isPrime(int num) {
         if (num <= 1) {
             return false;
@@ -158,6 +193,9 @@ public class Konsole {
         return true;
     }
 
+    /**
+     * Modul 2: Verschluesselt Text aus Datei unter Verwendung des oeffentlichen Schluessels und stellt den verschluesselten Text in einer neuen Datei oder in der Konsole bereit.
+     */
 
     public static void startEncrypt () {
         Konsole.printText("Verschluesselungsprozess gestartet");
@@ -187,6 +225,9 @@ public class Konsole {
         Cryptor.encrypt(filePath, publicKey, toNewFile);
     }
 
+    /**
+     * Modul 3: Entschluesselt Text aus Datei unter Verwendung des privaten Schluessels und stellt den entschluesselten Text in einer neuen Datei oder in der Konsole bereit.
+     */
 
     public static void startDecrypt () {
         Konsole.printText("Entschluesselungsprozess gestartet");
